@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	<style>
+		html,
+		body {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			background: linear-gradient(45deg, #49a09d, #5f2c82);
+		}
+
+		body h1 {
+			position: absolute;
+			top: 35%;
+			left: 38%;
+		}
+
+		body h2 {
+			position: absolute;
+			top: 42%;
+			left: 40%;
+		}
+	</style>
+
+</head>
+
+
+<body>
+	<h1 style="color: #fff"> Successfully saved user! </h1><br>
+	<h2 style="text-align:center; color: #fff" ;> Current User Count - <span id="count"></span></h2>
+</body>
+<script>
+	setInterval(function () {
+		$.get("usercount", function (results) {
+			$("#count").html(results);
+		});
+	}, 3000);
+
+</script>
+
+</html>

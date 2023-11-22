@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+        <style>
+                html {
+                        height: 100%;
+                        background: linear-gradient(45deg, #49a09d, #5f2c82);
+                }
+
+                #userform {
+                        width: 480px;
+                        margin: 0 auto;
+                        background-color: #fcfcfcbf;
+                        padding: 20px 50px 40px;
+                        box-shadow: 1px 4px 10px 1px #aaa;
+                        font-family: sans-serif;
+                }
+
+                #userform * {
+                        box-sizing: border-box;
+                }
+
+                #userform h2 {
+                        text-align: center;
+                        margin-bottom: 30px;
+                }
+
+                #userform input {
+                        margin-bottom: 15px;
+                }
+
+                #userform input[type=number] {
+                        display: block;
+                        height: 32px;
+                        padding: 6px 16px;
+                        width: 100%;
+                        border: none;
+                        background-color: #f3f3f3;
+                }
+
+                #userform input[type=text] {
+                        display: block;
+                        height: 32px;
+                        padding: 6px 16px;
+                        width: 100%;
+                        border: none;
+                        background-color: #f3f3f3;
+                }
+
+                #userform button[type=submit] {
+                        display: block;
+                        margin: 20px auto 0;
+                        width: 150px;
+                        height: 40px;
+                        border-radius: 25px;
+                        border: none;
+                        color: #eee;
+                        font-weight: 700;
+                        box-shadow: 1px 4px 10px 1px #aaa;
+                        background: linear-gradient(to right, #207cca 0%, #9f58a3 100%);
+
+                }
+        </style>
+
+</head>
+
+
+
+<body>
+        <div id="userform">
+                <h2 class="header">Create a User</h2>
+                <div>
+                        <form action="#" th:action="@{/createuser}" th:object="${user}" method="post">
+                                <span> <input type="text" placeholder="First Name" th:field="*{firstName}" /> <span
+                                                th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                                        </span><br /></span>
+                                </span>
+                                <span> <input type="text" placeholder="Last Name" th:field="*{lastName}" /> <span
+                                                th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+                                        </span><br /> </span>
+                                <span> <input type="text" placeholder="Email" th:field="*{email}" /> <span
+                                                th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                                        </span><br /> </span>
+                                <span> <input type="number" placeholder="Age" th:field="*{age}" /><span
+                                                th:if="${#fields.hasErrors('age')}" th:errors="*{age}"> </span> <br />
+                                </span>
+                                <button type="submit" value="submit">Submit</button>
+                        </form>
+                </div>
+                <h3> Current User Count - <span id="count"></span></h3>
+        </div>
+</body>
+
+<script>
+        setInterval(function () {
+                $.get("usercount", function (results) {
+                        $("#count").html(results);
+                });
+        }, 3000);
+
+</script>
+
+</html>
